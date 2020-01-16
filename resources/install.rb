@@ -128,6 +128,7 @@ action :create do
 
       rpm_package 'telegraf' do
         source "#{Chef::Config[:file_cache_path]}/#{file_name}"
+        version new_resource.install_version
         action :install
       end
     elsif platform_family? 'debian'
@@ -142,6 +143,7 @@ action :create do
       dpkg_package 'telegraf' do
         source "#{Chef::Config[:file_cache_path]}/#{file_name}"
         options '--force-confdef --force-confold'
+        version new_resource.install_version
         action :install
       end
     elsif platform_family? 'windows'
